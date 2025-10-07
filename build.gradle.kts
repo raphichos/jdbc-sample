@@ -22,8 +22,8 @@ repositories {
 dependencies {
     implementation("com.mysql:mysql-connector-j:9.4.0")
 
-    implementation("org.flywaydb:flyway-core:10.11.1")
-    implementation("org.flywaydb:flyway-mysql:10.11.1")
+    implementation("org.flywaydb:flyway-core:11.13.2")
+    implementation("org.flywaydb:flyway-mysql:11.13.2")
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
