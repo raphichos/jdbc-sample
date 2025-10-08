@@ -23,7 +23,6 @@ public class EmployeeDAO {
                     entity.getSalary().toString() + ", " +
                     "'" + formatOffsetDateTime(entity.getBirthday()) + "' )";
             statement.executeUpdate(sql);
-            //System.out.printf("Foram afetados %s registros na base de dados", statement.getUpdateCount());
             if (statement instanceof StatementImpl impl)
                 entity.setId(impl.getLastInsertID());
         }catch (SQLException ex){
@@ -32,11 +31,33 @@ public class EmployeeDAO {
     }
 
     public void update(final EmployeeEntity entity){
-
+        try(
+                var connection = ConnectionUtil.getConnection();
+                var statement = connection.createStatement();
+        ){
+            var sql = "UPDATE employees set " +
+                    "name     = '" + entity.getName() + "'," +
+                    "salary   = " + entity.getSalary().toString() + "," +
+                    "birthday = '" + formatOffsetDateTime(entity.getBirthday()) + "'" +
+                    "WHERE id = " + entity.getId();
+            statement.executeUpdate(sql);
+            if (statement instanceof StatementImpl impl)
+                entity.setId(impl.getLastInsertID());
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
     public void delete(final long id){
-
+        try(
+                var connection = ConnectionUtil.getConnection();
+                var statement = connection.createStatement();
+        ){
+            var sql = "DELETE FROM employees WHERE id = " + id;
+            statement.executeUpdate(sql);
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
     public List<EmployeeEntity> findAll(){

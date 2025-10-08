@@ -26,6 +26,16 @@ public class Main {
         //employeeDao.findAll().forEach(System.out::println);
 
         //System.out.println(employeeDao.findById(1));
+
+        /*var employee = new EmployeeEntity();
+        employee.setId(3);
+        employee.setName("Gabriel");
+        employee.setSalary(new BigDecimal("5500"));
+        employee.setBirthday(OffsetDateTime.now().minusYears(18).minusDays(3));
+        employeeDao.update(employee);*/
+
+        //employeeDao.delete(1);
+
     }
 
 }
