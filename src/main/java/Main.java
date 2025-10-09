@@ -1,5 +1,6 @@
 import persistence.EmployeeDAO;
 import org.flywaydb.core.Flyway;
+import persistence.EmployeeParamDAO;
 import persistence.entity.EmployeeAuditDAO;
 import persistence.entity.EmployeeEntity;
 
@@ -8,7 +9,7 @@ import java.time.OffsetDateTime;
 
 public class Main {
 
-    private final static EmployeeDAO employeeDao = new EmployeeDAO();
+    private final static EmployeeParamDAO employeeDao = new EmployeeParamDAO();
     private final static EmployeeAuditDAO employeeAuditDao = new EmployeeAuditDAO();
 
     public static void main(String[] args) {
@@ -18,11 +19,11 @@ public class Main {
         flyway.migrate();
 
         var insert = new EmployeeEntity();
-        insert.setName("Miguel");
+        insert.setName("Miguel'");
         insert.setSalary(new BigDecimal("2800"));
         insert.setBirthday(OffsetDateTime.now().minusYears(18));
         System.out.println(insert);
-        employeeDao.insert(insert);
+        employeeDao.insertWithProcedure(insert);
         System.out.println(insert);
 
         //employeeDao.findAll().forEach(System.out::println);
@@ -33,7 +34,7 @@ public class Main {
         update.setId(insert.getId());
         update.setName("Gabriel");
         update.setSalary(new BigDecimal("5500"));
-        update.setBirthday(OffsetDateTime.now().minusYears(18).minusDays(3));
+        update.setBirthday(OffsetDateTime.now().minusYears(36).minusDays(10));
         employeeDao.update(update);
 
         employeeDao.delete(insert.getId());
