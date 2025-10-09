@@ -1,5 +1,6 @@
 import persistence.EmployeeDAO;
 import org.flywaydb.core.Flyway;
+import persistence.entity.EmployeeAuditDAO;
 import persistence.entity.EmployeeEntity;
 
 import java.math.BigDecimal;
@@ -8,6 +9,7 @@ import java.time.OffsetDateTime;
 public class Main {
 
     private final static EmployeeDAO employeeDao = new EmployeeDAO();
+    private final static EmployeeAuditDAO employeeAuditDao = new EmployeeAuditDAO();
 
     public static void main(String[] args) {
         var flyway = Flyway.configure()
@@ -34,7 +36,9 @@ public class Main {
         update.setBirthday(OffsetDateTime.now().minusYears(18).minusDays(3));
         employeeDao.update(update);
 
-        employeeDao.delete(1);
+        employeeDao.delete(insert.getId());
+
+        employeeAuditDao.findAll().forEach(System.out::println);
 
     }
 
