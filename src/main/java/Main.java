@@ -15,26 +15,26 @@ public class Main {
                 .load();
         flyway.migrate();
 
-        /*var employee = new EmployeeEntity();
-        employee.setName("Miguel");
-        employee.setSalary(new BigDecimal("2800"));
-        employee.setBirthday(OffsetDateTime.now().minusYears(18));
-        System.out.println(employee);
-        employeeDao.insert(employee);
-        System.out.println(employee);*/
+        var insert = new EmployeeEntity();
+        insert.setName("Miguel");
+        insert.setSalary(new BigDecimal("2800"));
+        insert.setBirthday(OffsetDateTime.now().minusYears(18));
+        System.out.println(insert);
+        employeeDao.insert(insert);
+        System.out.println(insert);
 
         //employeeDao.findAll().forEach(System.out::println);
 
         //System.out.println(employeeDao.findById(1));
 
-        /*var employee = new EmployeeEntity();
-        employee.setId(3);
-        employee.setName("Gabriel");
-        employee.setSalary(new BigDecimal("5500"));
-        employee.setBirthday(OffsetDateTime.now().minusYears(18).minusDays(3));
-        employeeDao.update(employee);*/
+        var update = new EmployeeEntity();
+        update.setId(insert.getId());
+        update.setName("Gabriel");
+        update.setSalary(new BigDecimal("5500"));
+        update.setBirthday(OffsetDateTime.now().minusYears(18).minusDays(3));
+        employeeDao.update(update);
 
-        //employeeDao.delete(1);
+        employeeDao.delete(1);
 
     }
 
